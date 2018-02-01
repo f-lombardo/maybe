@@ -17,3 +17,10 @@ func (m *MayBe) OrElse(x interface{}, f MayBeFunction) *MayBe {
 	}
 	return m
 }
+
+func (m *MayBe) AndThen(f MayBeFunction) *MayBe {
+	if m.err == nil {
+		return NewMayBe(f(m.value))
+	}
+	return m
+}
